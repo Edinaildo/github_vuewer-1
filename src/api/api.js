@@ -30,5 +30,11 @@ export const api = {
         const url = `https://api.github.com/repos/${owner}/${name}/issues?page=${page}`
         const response = await fetch(url)
         return await response.json()
-    }
+    },
+    async listaArquivos(username, repo, path=''){
+        const url = `https://api.github.com/repos/${username}/${repo}/contents/${path}`
+        const response = await fetch(url)
+        return await response.json()
+    },
+    
 }
