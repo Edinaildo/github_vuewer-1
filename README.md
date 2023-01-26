@@ -1,5 +1,9 @@
 # github_vuewer
 
+### Preview
+![image](https://user-images.githubusercontent.com/96800713/214926554-9981948b-3559-4b6e-b7d7-197db9121853.png)
+
+
 ## Project setup
 ```
 npm install
