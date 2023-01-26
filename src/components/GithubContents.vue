@@ -2,6 +2,9 @@
     <div>
       <v-row>
         <v-col cols="12">
+            <div>
+                {{ repositorioPath }} 
+            </div>
             <v-simple-table>
               <template v-slot:default>
                 <thead>
@@ -13,7 +16,7 @@
                 <tbody>
                   <tr v-for="arquivo in arquivos " :key="arquivo.name">
                     <td>{{ arquivo.type }}</td>
-                    <td v-if="arquivo.type='dir'"><p @click="listaArquivosCompletos(arquivo.path)">{{ arquivo.name }}</p></td>
+                    <td v-if="arquivo.type=='dir'"><p @click="listaArquivosCompletos(arquivo.path)">{{ arquivo.name }}</p></td>
                     <td v-else >{{ arquivo.name }}</td>
                   </tr>
                 </tbody>
@@ -23,8 +26,8 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-progress-circular indeterminate color="primary" v-if="loading"></v-progress-circular>
-          <v-btn color="primary" v-if="temmais" @click="listaArquivos(caminho)">MAIS</v-btn>
+          <v-progress-circular indeterminate color="yellow" v-if="loading"></v-progress-circular>
+          <v-btn color="yellow" v-if="temmais" @click="listaArquivos(caminho)">MAIS</v-btn>
         </v-col>
       </v-row>
     </div>
@@ -56,7 +59,7 @@
           if (this.repositorioPath.length > 2) {
             this.repositorioPath.pop()
           }
-          this.reposiorioPath.push(caminho)
+          this.repositorioPath.push(caminho)
           this.path = this.repositorioPath.join('/')
           this.listaArquivos(caminho)
         },
@@ -75,6 +78,7 @@
           this.repositorioPath = [this.repositorioPath[0]]
           if (this.repo) {
             console.log(this.repo.name)
+            this.repositorioPath.push(this.repo.name)
             this.path = this.repositorioPath.join('/')
             this.listaArquivos()
           } else {

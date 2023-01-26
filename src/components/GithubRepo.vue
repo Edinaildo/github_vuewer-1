@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row class="text-center">
+    <v-row class="text-center" >
       <v-col cols="6">
         <v-autocomplete
         v-model="user"
@@ -62,6 +62,7 @@
       user() {
         if(this.user){
           this.listaRepositorios()
+          this.$emit('userselected', this.user)
         }
       },
       repo () {

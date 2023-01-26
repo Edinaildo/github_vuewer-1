@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <GithubRepo @reposelected="onRepoSelected"/>
-    <GithubIssues :repo="repo"/>
-    <GithubContents :repo="repo"/>
+    <GithubRepo @userselected="onUserSelected" @reposelected="onRepoSelected"/>
+    <!-- <GithubIssues :repo="repo"/> -->
+    <GithubContents :user="user" :repo="repo"/>
   </v-container>
 </template>
   
@@ -13,15 +13,20 @@
   export default {
     components: {
       GithubRepo,
-      GithubIssues,
+      // GithubIssues,
       GithubContents,
     },
     data: () => ({
-      repo: null
+      repo: null,
+      path: null,
+      user: null
     }),
     methods: {
       onRepoSelected(repo){
         this.repo = repo
+      },
+      onUserSelected(user){
+        this.user = user
       }
     }
   }
