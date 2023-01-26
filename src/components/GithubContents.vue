@@ -6,14 +6,15 @@
               <template v-slot:default>
                 <thead>
                   <tr>
-                    <th class="text-left">Number</th>
-                    <th class="text-left">Title</th>
+                    <th class="text-left">Tipo de arquivo</th>
+                    <th class="text-left">Nome</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="arquivo in arquivos " :key="arquivo.name">
                     <td>{{ arquivo.type }}</td>
-                    <td>{{ arquivo.name }}</td>
+                    <td v-if="arquivo.type='dir'"><p @click="listaArquivosCompletos(arquivo.path)">{{ arquivo.name }}</p></td>
+                    <td v-else >{{ arquivo.name }}</td>
                   </tr>
                 </tbody>
               </template>
@@ -39,7 +40,9 @@
         arquivos: [],
         loading: false,
         temmais: false,
-        currentPage: 1
+        currentPage: 1,
+        repositorioPath: [],
+        path: null,
       }),
       methods: {
         async listaArquivos(caminho){
@@ -48,12 +51,31 @@
           this.arquivos = maisarquivos
           this.loading = false
           console.log(maisarquivos)
-        }
+        },
+        async listaArquivosCompletos(caminho) {
+          if (this.repositorioPath.length > 2) {
+            this.repositorioPath.pop()
+          }
+          this.reposiorioPath.push(caminho)
+          this.path = this.repositorioPath.join('/')
+          this.listaArquivos(caminho)
+        },
       },
       watch: {
+        user() {
+          this.repositorioPath = []
+          if(this.user) {
+            console.log(this.user)
+            this.repositorioPath.push(this.user)
+            this.path = this.repositorioPath.join('/')
+          }
+        },
         repo(){
           this.arquivos = []
+          this.repositorioPath = [this.repositorioPath[0]]
           if (this.repo) {
+            console.log(this.repo.name)
+            this.path = this.repositorioPath.join('/')
             this.listaArquivos()
           } else {
             this.arquivos = []
