@@ -1,6 +1,6 @@
 # github_vuewer
 
-### Preview
+### Preview [Clique aqui para acessar](https://edinaildo.github.io/github_vuewer-1/)
 ![image](https://user-images.githubusercontent.com/96800713/214926554-9981948b-3559-4b6e-b7d7-197db9121853.png)
 
 
